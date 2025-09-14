@@ -1,8 +1,8 @@
-const CACHE = 'onechat-v31.4';
+const CACHE = 'onechat-v31.5';
 const ASSETS = [
   './',
   './index.html',
-  './styles.css?v=31.3',
+  './styles.css?v=31.5',
   './app.js?v=31.3',
   './config.js',
   './manifest.json'
