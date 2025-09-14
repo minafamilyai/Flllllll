@@ -1,0 +1,69 @@
+:root{
+  --bg:#0b0f14; --sidebar:#0f1720; --card:#0f1720; --text:#e5e7eb; --muted:#9aa4b2;
+  --pri:#22d3ee; --pri2:#06b6d4; --danger:#ef4444; --bubble:#111827; --bubble-mine:#1f2937; --border:#1f2937;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+a{color:var(--pri)} .hidden{display:none!important}
+#top{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--sidebar);border-bottom:1px solid var(--border)}
+.brand{font-weight:900;font-size:20px;color:var(--pri);cursor:pointer}
+.chips{display:flex;gap:10px;margin-left:auto;align-items:center}
+.chip{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--border);border-radius:12px;background:var(--card)}
+.chip.sq{width:64px;height:64px;justify-content:center}
+.chip.action{cursor:pointer}
+.chip.danger{background:var(--danger);color:#fff;border-color:transparent}
+
+main{display:grid;grid-template-rows:1fr auto;min-height:calc(100vh - 62px)}
+#messages{padding:16px;overflow:auto;display:flex;flex-direction:column;gap:10px}
+#messages.empty + #centerComposer{display:grid}
+#messages.empty ~ #composer{display:none}
+#messages:not(.empty) + #centerComposer{display:none}
+#messages:not(.empty) ~ #composer{display:grid}
+
+.msg{max-width:72%;padding:12px;border-radius:14px;border:1px solid var(--border);background:var(--bubble)}
+.msg.mine{align-self:flex-end;background:var(--bubble-mine)}
+.msg .meta{font-size:11px;color:var(--muted);margin-bottom:4px}
+.msg .text{white-space:pre-wrap;word-break:break-word}
+.msg .file{display:flex;flex-direction:column;gap:8px}
+.msg .file .name{font-weight:700}
+.msg .file .preview{display:block;max-width:min(360px,72vw);max-height:38vh;border:1px solid var(--border);border-radius:12px;object-fit:contain;background:#0b1220}
+
+.center-composer{display:none;place-items:center}
+.center-box{width:min(640px,92vw);border:1px solid var(--border);border-radius:16px;background:var(--card);padding:18px;text-align:center}
+.center-box .title{font-weight:800;font-size:18px}
+.center-box .sub{color:var(--muted);margin:6px 0 12px}
+.center-box textarea{width:100%;height:80px;border:1px solid var(--border);border-radius:12px;background:#0b1220;color:var(--text);padding:10px;resize:vertical}
+.center-box .actions{margin-top:8px;display:flex;gap:8px;justify-content:center}
+
+.composer{display:none;grid-template-columns:auto 1fr auto;gap:8px;padding:12px;border-top:1px solid var(--border);background:var(--card)}
+.composer textarea{width:100%;height:64px;border:1px solid var(--border);border-radius:12px;background:#0b1220;color:#e5e7eb;padding:10px;resize:vertical}
+.btn{padding:10px 12px;border:none;border-radius:10px;background:#1f2937;color:#fff;cursor:pointer}
+.btn.primary{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#001217;font-weight:700}
+
+@media (max-width: 900px){
+  .msg{max-width:86%}
+}
+
+
+/* === v31.4 final: hide CODE/LINK on header, keep layout stable === */
+:root{ --topbar-h: 76px; --bottombar-h: 96px; }
+#top{ position:fixed; top:0; left:0; right:0; z-index:1000;
+      display:grid; grid-template-columns: 1fr auto auto; grid-template-rows:auto; align-items:center; gap:8px 12px; }
+main{ min-height:100dvh; height:100dvh; overflow:hidden; padding-top:var(--topbar-h); padding-bottom:var(--bottombar-h); }
+#messages{ height:calc(100dvh - var(--topbar-h) - var(--bottombar-h)); overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
+.composer{ position:fixed; left:0; right:0; bottom:0; z-index:1000; }
+html,body{ overscroll-behavior-y:none; overflow-x:hidden; }
+
+/* Hide CODE/LINK completely (keep DOM for JS) */
+#linkBtn{ display:none !important; }
+#codeText{ display:none !important; }
+.chips>.chip:first-child{ display:none !important; } /* CODE wrapper */
+.chips>.chip.action{ display:none !important; }      /* LINK button */
+
+/* QR & exit */
+#qrCanvas{ width:88px !important; height:88px !important; display:block; }
+#exitBtn.chip{ width:28px; height:28px; min-width:28px; padding:0; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:15px; }
+
+/* Composer input size so iOS không zoom và không đẩy nút */
+.composer textarea{ font-size:16px; line-height:1.35; }
+#sendBtn{ min-width:52px; }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>ONECHAT</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./styles.css?v=31.3" />
+</head>
+<body>
+  <!-- Top bar -->
+  <header id="top">
+    <div class="brand" id="homeBtn">ONECHAT</div>
+    <div class="chips">
+      <div class="chip"><span>CODE</span><b id="codeText">—</b></div>
+      <button id="linkBtn" class="chip action">LINK</button>
+      <div id="qrBox" class="chip sq"><canvas id="qrCanvas" width="64" height="64"></canvas></div>
+      <button id="exitBtn" class="chip sq danger">✕</button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <section id="messages" class="empty"></section>
+
+    <!-- composer giữa (chưa có tin) -->
+    <section id="centerComposer" class="center-composer">
+      <div class="center-box">
+        <div class="title">Bắt đầu trò chuyện</div>
+        <div class="sub">Mời người khác bằng QR/LINK/CODE phía trên</div>
+        <textarea id="msgCenter" placeholder="Nhập tin nhắn..."></textarea>
+        <div class="actions">
+          <button id="attachCenter" class="btn">＋</button>
+          <button id="sendCenter" class="btn primary">Gửi</button>
+        </div>
+        <input id="fileCenter" type="file" hidden />
+      </div>
+    </section>
+
+    <!-- composer dưới (khi đã có tin) -->
+    <footer id="composer" class="composer">
+      <button id="attachBtn" class="btn">＋</button>
+      <textarea id="msgInput" placeholder="Nhập CODE để tham gia phòng… hoặc gõ tin nhắn…"></textarea>
+      <button id="sendBtn" class="btn primary">➤</button>
+      <input id="fileInput" type="file" hidden />
+    </footer>
+  </main>
+
+  <script src="./config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <!-- app -->
+  <script type="module" src="./app.js?v=31.3"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=31.3'));
+    }
+  </script>
+</body>
+</html>
